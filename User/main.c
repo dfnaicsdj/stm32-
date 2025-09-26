@@ -2,8 +2,7 @@
 #include "Delay.h"
 #include "OLED.h"
 #include "Timer.h"
-#include "Key.h"
-#include "MENU.h"
+#include "MPU6050.h"
 #include "KEY_I.h"
 #include "MyRTC.h"
 #include "OLED_Data.h"
@@ -32,6 +31,7 @@ void MENU_Init(void);
 
 int main(void)
 {	
+	MPU6050_Init();
 	MyRTC_Init();
 	Timer_Init();
 	key_I_INIT();

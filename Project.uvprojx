@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -709,26 +709,6 @@
               <FilePath>.\Hardware\OLED_Data.h</FilePath>
             </File>
             <File>
-              <FileName>Key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\Key.c</FilePath>
-            </File>
-            <File>
-              <FileName>Key.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\Key.h</FilePath>
-            </File>
-            <File>
-              <FileName>LED.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\LED.c</FilePath>
-            </File>
-            <File>
-              <FileName>LED.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\LED.h</FilePath>
-            </File>
-            <File>
               <FileName>KEY_I.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\KEY_I.c</FilePath>
@@ -737,16 +717,6 @@
               <FileName>KEY_I.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\KEY_I.h</FilePath>
-            </File>
-            <File>
-              <FileName>MENU.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\MENU.c</FilePath>
-            </File>
-            <File>
-              <FileName>MENU.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\MENU.h</FilePath>
             </File>
             <File>
               <FileName>TREE.c</FileName>
@@ -767,6 +737,41 @@
               <FileName>TREE_UI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\TREE_UI.h</FilePath>
+            </File>
+            <File>
+              <FileName>DINO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\DINO.c</FilePath>
+            </File>
+            <File>
+              <FileName>DINO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\DINO.h</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\MPU6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\MPU6050.h</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050_Reg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\MPU6050_Reg.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyI2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\MyI2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyI2C.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\MyI2C.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,5 +1,6 @@
 #include "stm32f10x.h"                  // Device header
 #include "TREE_UI.h"
+#include "DINO.h"
 /**
   * 函    数：定时中断初始化
   * 参    数：无
@@ -55,6 +56,8 @@ void TIM2_IRQHandler(void)
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET)
 	{
 		StopWatch_Tick();
+		dino_tick();
+		//MPU6050_Calculation();
 		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 	}
 }

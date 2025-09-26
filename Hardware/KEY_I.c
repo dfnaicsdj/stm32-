@@ -1,5 +1,4 @@
 #include "stm32f10x.h"                  // Device header
-#include "MENU.h"
 #include "Delay.h"
 #include "TREE.h"
 void Key_operation(int operation);
@@ -51,11 +50,10 @@ uint8_t key_GetFlag(uint16_t GPIO_Pin){
 		Delay_ms(10);//消抖
 		if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin) == 0){
 		flag = 1;//确认按键按下
-		while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin) == 0){}//按键抬起，退出循环
-		Delay_ms(10);		
+		//while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin) == 0){}//按键抬起，退出循环
+		//Delay_ms(10);		
 		}
 	}
-	//if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin) == 0){flag = 1;}
 	return flag;
 }
 
@@ -64,21 +62,36 @@ uint8_t key_GetFlag(uint16_t GPIO_Pin){
   * @param  无
   * @retval 无
   */
-/*void Key_press(void){
-	if (key_GetFlag(GPIO_Pin_3) == 1){Key_operation(3);}
-	else if (key_GetFlag(GPIO_Pin_4) == 1){Key_operation(4);}
-	else if (key_GetFlag(GPIO_Pin_5) == 1){Key_operation(5);}
-	else{Key_operation(0);}//没有操作，保持页数和光标，刷新时间
 
-}*/
 void Key_press(void){
-	if (key_GetFlag(GPIO_Pin_3) == 1){process_key(2);}//右键光标++
-	else if (key_GetFlag(GPIO_Pin_4) == 1){process_key(1);}//左键光标--
-	else if (key_GetFlag(GPIO_Pin_5) == 1){process_key(3);}
-	else if (key_GetFlag(GPIO_Pin_6) == 1){process_key(4);}
+	if (key_GetFlag(GPIO_Pin_3) == 1){
+		process_key(2);
+		while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_3) == 0){process_key(0);}//按键抬起，退出循环
+			}//右键光标++
+	else if (key_GetFlag(GPIO_Pin_4) == 1){
+		process_key(1);
+		while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_4) == 0){process_key(0);}//按键抬起，退出循环
+	}//左键光标--
+	else if (key_GetFlag(GPIO_Pin_5) == 1){
+		process_key(3);
+		while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_5) == 0){process_key(0);}//按键抬起，退出循环
+	}
+	else if (key_GetFlag(GPIO_Pin_6) == 1){
+		process_key(4);
+		while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_6) == 0){process_key(0);}//按键抬起，退出循环
+	}
 	else{process_key(0);}//没有操作，保持页数和光标，刷新时间
 
 }
+/*
+void Key_press(void){
+	if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_3)==0){process_key(2);}//右键光标++
+	else if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_4)==0){process_key(1);}//左键光标--
+	else if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_5)==0){process_key(3);}
+	else if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_6)==0){process_key(4);}
+	else{process_key(0);}//没有操作，保持页数和光标，刷新时间
+
+}*/
 
 
 
@@ -90,6 +103,7 @@ uint8_t page = 1;//初始页数为1
   * @param  操作参数
   * @retval 无
   */
+/*
 void Key_operation(int operation){
 	switch(operation){
 		case 0:
@@ -117,4 +131,4 @@ void Key_operation(int operation){
 	
 	}
 	
-
+*/

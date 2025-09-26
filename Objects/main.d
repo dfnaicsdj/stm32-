@@ -32,8 +32,7 @@
 .\objects\main.o: .\Hardware\OLED.h
 .\objects\main.o: .\Hardware\OLED_Data.h
 .\objects\main.o: .\System\Timer.h
-.\objects\main.o: .\Hardware\Key.h
-.\objects\main.o: .\Hardware\MENU.h
+.\objects\main.o: .\Hardware\MPU6050.h
 .\objects\main.o: .\Hardware\KEY_I.h
 .\objects\main.o: .\System\MyRTC.h
 .\objects\main.o: .\Hardware\TREE.h

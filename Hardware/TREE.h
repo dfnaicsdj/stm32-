@@ -3,5 +3,5 @@
 
 void process_key(uint8_t key);
 void init_page_tree(void);
-
+extern uint8_t cursor;
 #endif

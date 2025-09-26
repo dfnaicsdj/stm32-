@@ -33,3 +33,8 @@
 .\objects\tree_ui.o: .\System\MyRTC.h
 .\objects\tree_ui.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\tree_ui.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\tree_ui.o: Hardware\DINO.h
+.\objects\tree_ui.o: .\System\Delay.h
+.\objects\tree_ui.o: Hardware\MPU6050.h
+.\objects\tree_ui.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\tree_ui.o: Hardware\TREE.h

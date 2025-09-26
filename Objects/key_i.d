@@ -28,6 +28,5 @@
 .\objects\key_i.o: .\Library\stm32f10x_usart.h
 .\objects\key_i.o: .\Library\stm32f10x_wwdg.h
 .\objects\key_i.o: .\Library\misc.h
-.\objects\key_i.o: Hardware\MENU.h
 .\objects\key_i.o: .\System\Delay.h
 .\objects\key_i.o: Hardware\TREE.h

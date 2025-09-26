@@ -4,7 +4,11 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "OLED_Data.h"
-
+#include "DINO.h"
+#include "Delay.h"
+#include "MPU6050.h"
+#include "math.h"
+#include "TREE.h"
 /**
   * @brief  绘制首页UI
   * @param  光标值
@@ -88,12 +92,86 @@ void draw_page2_1(uint8_t cursor) {
   * @retval 无
   */
 void draw_page2_2(uint8_t cursor) {
-				OLED_Clear();
-				MyRTC_ReadTime();
-				OLED_ShowString(0,48,"菜单",OLED_8X16);
-				OLED_ShowString(96,48,"设置",OLED_8X16);
-				OLED_ReverseArea(0,48,32,16);
-				OLED_Update();
+	switch(cursor){
+		case 1:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			OLED_Printf(30,12,OLED_6X8,"year:%d",MyRTC_Time[0]);
+			OLED_Printf(30,20,OLED_6X8,"month:%d",MyRTC_Time[1]);
+			OLED_Printf(30,28,OLED_6X8,"day:%d",MyRTC_Time[2]);
+			OLED_Printf(30,36,OLED_6X8,"hour:%d",MyRTC_Time[3]);
+			OLED_Printf(30,44,OLED_6X8,"min:%d",MyRTC_Time[4]);
+			OLED_Printf(30,52,OLED_6X8,"sec:%d",MyRTC_Time[5]);
+			OLED_ShowImage(20, 12, 8, 8, rarrow8);//year
+			OLED_ReverseArea(30,12,24,8);
+			OLED_Update();
+			break;
+		case 2:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			OLED_Printf(30,12,OLED_6X8,"year:%d",MyRTC_Time[0]);
+			OLED_Printf(30,20,OLED_6X8,"month:%d",MyRTC_Time[1]);
+			OLED_Printf(30,28,OLED_6X8,"day:%d",MyRTC_Time[2]);
+			OLED_Printf(30,36,OLED_6X8,"hour:%d",MyRTC_Time[3]);
+			OLED_Printf(30,44,OLED_6X8,"min:%d",MyRTC_Time[4]);
+			OLED_Printf(30,52,OLED_6X8,"sec:%d",MyRTC_Time[5]);
+			OLED_ShowImage(20, 20, 8, 8, rarrow8);//month
+			OLED_ReverseArea(30,20,30,8);
+			OLED_Update();
+			break;
+		case 3:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			OLED_Printf(30,12,OLED_6X8,"year:%d",MyRTC_Time[0]);
+			OLED_Printf(30,20,OLED_6X8,"month:%d",MyRTC_Time[1]);
+			OLED_Printf(30,28,OLED_6X8,"day:%d",MyRTC_Time[2]);
+			OLED_Printf(30,36,OLED_6X8,"hour:%d",MyRTC_Time[3]);
+			OLED_Printf(30,44,OLED_6X8,"min:%d",MyRTC_Time[4]);
+			OLED_Printf(30,52,OLED_6X8,"sec:%d",MyRTC_Time[5]);
+			OLED_ShowImage(20, 28, 8, 8, rarrow8);//day
+			OLED_ReverseArea(30,28,18,8);
+			OLED_Update();
+			break;
+		case 4:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			OLED_Printf(30,12,OLED_6X8,"year:%d",MyRTC_Time[0]);
+			OLED_Printf(30,20,OLED_6X8,"month:%d",MyRTC_Time[1]);
+			OLED_Printf(30,28,OLED_6X8,"day:%d",MyRTC_Time[2]);
+			OLED_Printf(30,36,OLED_6X8,"hour:%d",MyRTC_Time[3]);
+			OLED_Printf(30,44,OLED_6X8,"min:%d",MyRTC_Time[4]);
+			OLED_Printf(30,52,OLED_6X8,"sec:%d",MyRTC_Time[5]);
+			OLED_ShowImage(20, 36, 8, 8, rarrow8);//hour
+			OLED_ReverseArea(30,36,24,8);
+			OLED_Update();
+			break;
+		case 5:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			OLED_Printf(30,12,OLED_6X8,"year:%d",MyRTC_Time[0]);
+			OLED_Printf(30,20,OLED_6X8,"month:%d",MyRTC_Time[1]);
+			OLED_Printf(30,28,OLED_6X8,"day:%d",MyRTC_Time[2]);
+			OLED_Printf(30,36,OLED_6X8,"hour:%d",MyRTC_Time[3]);
+			OLED_Printf(30,44,OLED_6X8,"min:%d",MyRTC_Time[4]);
+			OLED_Printf(30,52,OLED_6X8,"sec:%d",MyRTC_Time[5]);
+			OLED_ShowImage(20, 44, 8, 8, rarrow8);//min
+			OLED_ReverseArea(30,44,18,8);
+			OLED_Update();
+			break;
+		case 6:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			OLED_Printf(30,12,OLED_6X8,"year:%d",MyRTC_Time[0]);
+			OLED_Printf(30,20,OLED_6X8,"month:%d",MyRTC_Time[1]);
+			OLED_Printf(30,28,OLED_6X8,"day:%d",MyRTC_Time[2]);
+			OLED_Printf(30,36,OLED_6X8,"hour:%d",MyRTC_Time[3]);
+			OLED_Printf(30,44,OLED_6X8,"min:%d",MyRTC_Time[4]);
+			OLED_Printf(30,52,OLED_6X8,"sec:%d",MyRTC_Time[5]);
+			OLED_ShowImage(20, 52, 8, 8, rarrow8);//year
+			OLED_ReverseArea(30,52,18,8);
+			OLED_Update();
+			break;
+	}
 }
 
 /**
@@ -109,31 +187,106 @@ void draw_page3_1(uint8_t cursor) {
 				OLED_ShowImage(112, 24, 16, 16, rarrow);
 				OLED_Update();
 }
+
+
+void MPU6050_Calculation(void);
 /**
   * @brief  绘制第3层第二个节点UI，陀螺仪图标,2-1的子节点
   * @param  光标值
   * @retval 无
   */
 void draw_page3_2(uint8_t cursor) {
-				OLED_Clear();
-				MyRTC_ReadTime();
-				OLED_ShowImage(0, 24, 16, 16, larrow);
-				OLED_ShowImage(112, 24, 16, 16, rarrow);
-				OLED_ShowImage(30, 0, 68, 63, mpu);
-				OLED_Update();
+	switch(cursor){
+		case 1:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			MPU6050_Calculation();
+			MPU6050_show();
+			OLED_Update();	
+			break;
+		case 2:
+			OLED_Clear();
+			MyRTC_ReadTime();
+			MPU6050_Calculation();
+			MPU6050_gradienter();
+			OLED_Update();	
+		}
 }
+
 /**
-  * @brief  绘制第3层第3个节点UI，小恐龙图标,2-1的子节点
+  * @brief  绘制第3层第3个节点UI，小恐龙游戏,2-1的子节点
   * @param  光标值
   * @retval 无
   */
+uint8_t state=0;//
 void draw_page3_3(uint8_t cursor) {
+	switch(cursor){
+		case 1:
+			if((state == 1)||(state == 0 && dino_jump_flag == 1)){//光标切换/跳跃标志位=1，跳跃
 				OLED_Clear();
 				MyRTC_ReadTime();
-				OLED_ShowImage(0, 24, 16, 16, larrow);
-				OLED_ShowImage(112, 24, 16, 16, rarrow);
-				OLED_ShowImage(30, 0, 68, 63, dragon);
+				show_score();
+				show_ground();
+				show_barrier();
+				show_cloud();
+				show_dino(1);
 				OLED_Update();
+			}
+			if(state == 0 && dino_jump_flag == 0){
+				OLED_Clear();
+				MyRTC_ReadTime();
+				show_score();
+				show_ground();
+				show_barrier();
+				show_cloud();
+				show_dino(0);
+				OLED_Update();
+			}
+			if(isColliding(&dino,&barrier)==1){
+				OLED_Clear();
+				OLED_ShowString(28,24,"Game Over",OLED_8X16);
+				OLED_Update();
+				Delay_s(1);
+				game_init();
+				OLED_Clear();
+				OLED_Update();
+			};
+			state = 0;
+			break;
+		case 2://跳跃
+			if((state == 0)||(state == 1 && dino_jump_flag == 1)){//光标切换/跳跃标志位=1，跳跃
+				OLED_Clear();
+				MyRTC_ReadTime();
+				show_score();
+				show_ground();
+				show_barrier();
+				show_cloud();
+				show_dino(1);
+				OLED_Update();
+			}
+			if(state == 1 && dino_jump_flag == 0){
+				OLED_Clear();
+				MyRTC_ReadTime();
+				show_score();
+				show_ground();
+				show_barrier();
+				show_cloud();
+				show_dino(0);
+				OLED_Update();
+			}
+			state = 1;
+			if(isColliding(&dino,&barrier)==1){
+				OLED_Clear();
+				OLED_ShowString(28,24,"Game Over",OLED_8X16);
+				OLED_Update();
+				Delay_s(1);
+				game_init();
+				OLED_Clear();
+				OLED_Update();
+			};
+			break;
+	}
+				
 }
 
 
@@ -143,7 +296,7 @@ uint8_t history[4];
 uint8_t start_timing_flag;
 uint8_t flag;
 /**
-  * @brief  绘制第3层第4个节点UI，秒表图标,2-1的子节点
+  * @brief  绘制第3层第4个节点UI，秒表功能,2-1的子节点
   * @param  光标值
   * @retval 无
   */
@@ -240,8 +393,254 @@ void StopWatch_Tick(void)
 	}
 	
 }
+/**
+  * @brief  年设置
+  * @param  止
+  * @retval 无
+  */
 
+void draw_page3_5(uint8_t cursor) {//！！！！！！！！！光标移动后时间未改变,还需确认时钟计时逻辑
+	static uint8_t temp = 0;
+	switch(cursor){
+		case 1://初始
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 2){MyRTC_Time[0]--;}
+				else if(temp == 3){MyRTC_Time[0]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[0],4,OLED_12X24);
+				OLED_Update();
+				break;
+		case 2://数字增加
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 3){MyRTC_Time[0]--;}
+				else if(temp == 1){MyRTC_Time[0]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[0],4,OLED_12X24);
+				OLED_Update();
+				break;
+		case 3://数字减少
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 1){MyRTC_Time[0]--;}
+				else if(temp == 2){MyRTC_Time[0]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[0],4,OLED_12X24);
+				OLED_Update();
+				break;
+	}
 
+}
+/**
+  * @brief  月设置
+  * @param  止
+  * @retval 无
+  */
+	
+void draw_page3_6(uint8_t cursor) {//！！！！！！！！！光标移动后时间未改变,还需确认时钟计时逻辑
+	static uint8_t temp = 0;
+	switch(cursor){
+		case 1://初始
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 2){MyRTC_Time[1]--;}
+				else if(temp == 3){MyRTC_Time[1]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[1],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 2://数字增加
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 3){MyRTC_Time[1]--;}
+				else if(temp == 1){MyRTC_Time[1]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[1],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 3://数字减少
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 1){MyRTC_Time[1]--;}
+				else if(temp == 2){MyRTC_Time[1]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[1],2,OLED_12X24);
+				OLED_Update();
+				break;
+	}
 
+}
+/**
+  * @brief  日设置
+  * @param  止
+  * @retval 无
+  */
 
+void draw_page3_7(uint8_t cursor) {//！！！！！！！！！光标移动后时间未改变,还需确认时钟计时逻辑
+	static uint8_t temp = 0;
+	switch(cursor){
+		case 1://初始
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 2){MyRTC_Time[2]--;}
+				else if(temp == 3){MyRTC_Time[2]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[2],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 2://数字增加
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 3){MyRTC_Time[2]--;}
+				else if(temp == 1){MyRTC_Time[2]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[2],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 3://数字减少
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 1){MyRTC_Time[2]--;}
+				else if(temp == 2){MyRTC_Time[2]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[2],2,OLED_12X24);
+				OLED_Update();
+				break;
+	}
+
+}
+
+/**
+  * @brief  时设置
+  * @param  止
+  * @retval 无
+  */
+void draw_page3_8(uint8_t cursor) {
+	static uint8_t temp = 0;
+	switch(cursor){
+		case 1://初始
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 2){MyRTC_Time[3]--;}
+				else if(temp == 3){MyRTC_Time[3]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[3],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 2://数字增加
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 3){MyRTC_Time[3]--;}
+				else if(temp == 1){MyRTC_Time[3]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[3],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 3://数字减少
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 1){MyRTC_Time[3]--;}
+				else if(temp == 2){MyRTC_Time[3]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[3],2,OLED_12X24);
+				OLED_Update();
+				break;
+	}
+
+}
+/**
+  * @brief  分设置
+  * @param  止
+  * @retval 无
+  */
+void draw_page3_9(uint8_t cursor) {//！！！！！！！！！光标移动后时间未改变,还需确认时钟计时逻辑
+	static uint8_t temp = 0;
+	switch(cursor){
+		case 1://初始
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 2){MyRTC_Time[4]--;}
+				else if(temp == 3){MyRTC_Time[4]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[4],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 2://数字增加
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 3){MyRTC_Time[4]--;}
+				else if(temp == 1){MyRTC_Time[4]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[4],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 3://数字减少
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 1){MyRTC_Time[4]--;}
+				else if(temp == 2){MyRTC_Time[4]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[4],2,OLED_12X24);
+				OLED_Update();
+				break;
+	}
+
+}
+/**
+  * @brief  秒设置
+  * @param  止
+  * @retval 无
+  */
+void draw_page3_10(uint8_t cursor) {//！！！！！！！！！光标移动后时间未改变,还需确认时钟计时逻辑
+	static uint8_t temp = 0;
+	switch(cursor){
+		case 1://初始
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 2){MyRTC_Time[5]--;}
+				else if(temp == 3){MyRTC_Time[5]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[5],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 2://数字增加
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 3){MyRTC_Time[5]--;}
+				else if(temp == 1){MyRTC_Time[5]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[5],2,OLED_12X24);
+				OLED_Update();
+				break;
+		case 3://数字减少
+				OLED_Clear();
+				MyRTC_ReadTime();
+				if(temp == 1){MyRTC_Time[5]--;}
+				else if(temp == 2){MyRTC_Time[5]++;}
+				MyRTC_SetTime();
+				temp = cursor;//刷新temp
+				OLED_ShowNum(40,12,MyRTC_Time[5],2,OLED_12X24);
+				OLED_Update();
+				break;
+	}
+
+}
 

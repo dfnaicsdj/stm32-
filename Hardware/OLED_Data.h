@@ -40,7 +40,11 @@ extern uint8_t dragon[];
 extern uint8_t stopwatch[];
 extern uint8_t larrow[];
 extern uint8_t rarrow[];
-
+extern uint8_t Ground[];
+extern uint8_t Barrier[][48];
+extern uint8_t Cloud[];
+extern uint8_t Dino[][48];
+extern uint8_t rarrow8[];
 #endif
 
 
